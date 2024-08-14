@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buku Tamu</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #5c67f2;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4752d9;
+        }
+
+        .messages {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .message {
+            background: #f1f1f1;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .message h3 {
+            margin: 0 0 5px;
+            color: #5c67f2;
+        }
+
+        .message p {
+            margin: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buku Tamu</h1>
+        <form id="guestbook-form">
+            <input type="text" id="name" placeholder="Nama Anda" required>
+            <textarea id="message" placeholder="Pesan Anda" rows="4" required></textarea>
+            <button type="submit">Kirim</button>
+        </form>
+        <div class="messages" id="messages">
+            <!-- Pesan tamu akan muncul di sini -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('guestbook-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+
+            if (name && message) {
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('message');
+
+                const messageTitle = document.createElement('h3');
+                messageTitle.textContent = name;
+
+                const messageContent = document.createElement('p');
+                messageContent.textContent = message;
+
+                messageContainer.appendChild(messageTitle);
+                messageContainer.appendChild(messageContent);
+
+                document.getElementById('messages').appendChild(messageContainer);
+
+                // Clear form after submission
+                document.getElementById('name').value = '';
+                document.getElementById('message').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
